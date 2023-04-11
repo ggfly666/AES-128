@@ -160,7 +160,7 @@ void InvAES(unsigned char ciphertext[16], unsigned char plaintext[16], unsigned 
 
 unsigned char Mul(unsigned char a, unsigned char b){
     unsigned char i;
-	unsigned char temp;
+    unsigned char temp;
     unsigned char result[8];
     unsigned char sum = 0;
     result[0] = a;
