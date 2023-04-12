@@ -1,6 +1,6 @@
 #include<iostream>
 #include<cstdlib>
-#include <iomanip>
+#include<iomanip>
 
 const unsigned char S[256]{
     0x63, 0x7C, 0x77, 0x7B, 0xF2, 0x6B, 0x6F, 0xC5, 0x30, 0x01, 0x67, 0x2B, 0xFE, 0xD7, 0xAB, 0x76,
@@ -158,30 +158,24 @@ void KeyExpansion(unsigned char K[16], unsigned char k[11][16]);
 void AES(unsigned char plaintext[16], unsigned char ciphertext[16], unsigned char k[11][16], int Rround);
 void InvAES(unsigned char ciphertext[16], unsigned char plaintext[16], unsigned char k[11][16], int Rround);
 
-unsigned char Mul(unsigned char a, unsigned char b){
-    unsigned char i;
-    unsigned char temp;
-    unsigned char result[8];
-    unsigned char sum = 0;
-    result[0] = a;
-    for (i = 1; i < 8; i++){
-        temp = result[i - 1];
-        temp = temp >> 7;
-        if(temp==1){
-            result[i] = result[i - 1] << 1 ^ 0x1b;
-        }
-		else{
-            result[i] = result[i - 1] << 1;
+unsigned char Mul(unsigned char aa, unsigned char bb){
+    int a, b, i, j;
+    a = (int)aa;
+    b = (int)bb;
+    int t, value;
+    for (i = 0; i < 8; i++){
+        t = (b >> i) & 0x1;
+        if(t){
+            value ^= (a << i);
         }
     }
-    for (i = 0; i < 8; i++)
-    {
-        temp = b << i & 0x80;
-        if(temp==0x80){
-            sum ^= result[7 - i];
+    for (j = 15; j > 7; j--){
+        t = (value >> j) & 0x1;
+        if(t){
+            value ^= (0x11b << (j - 8));
         }
     }
-    return sum;
+    return (unsigned int)value;
 }
 
 void AddRoundKey(unsigned char *a, unsigned char *Key){
