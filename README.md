@@ -1,2 +1,2 @@
-A AES copy with using C++.
+A AES copy with using C.
 
