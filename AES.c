@@ -341,22 +341,22 @@ int main(){
     printf("The plaintext that needs to be encrypted is:\t");
     int i;
     for (i = 0; i < 16; i++){
-        printf("%02h", p[i]);
+        printf("%02x", p[i]);
     }
-    cout << endl;
+    printf("\n");
     AES(p, c, rk, 10);
-    cout << "The encrypted ciphertext is:\t";
+    printf("The encrypted ciphertext is:\t");
     int j;
     for (j = 0; j < 16;j++){
-        cout << hex << c[j];
+        printf("%02x",c[j]);
     }
-    cout << endl;
+    printf("\n");
     InvAES(c, pp, rk, 10);
-    cout << "The decrypted plaintext is:\t";
+    printf("The decrypted plaintext is:\t");
     int m;
     for (m = 0; m < 16;m++){
-        cout << hex << pp[m];
+        printf("%02x", pp[m]);
     }
-    cout << endl;
+    printf("\n");
     return 0;
 }
